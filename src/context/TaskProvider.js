@@ -11,10 +11,12 @@ const reducer = (state, action) => {
 };
 
 export default function TaskProvider({ children }) {
-    const [task, dispatch] = useReducer(reducer, []);
+    const [tasks, dispatch] = useReducer(reducer, []);
     const [taskName, setTaskName] = useState("");
     return (
-        <TaskContext.Provider value={{ task, dispatch, taskName, setTaskName }}>
+        <TaskContext.Provider
+            value={{ tasks, dispatch, taskName, setTaskName }}
+        >
             {children}
         </TaskContext.Provider>
     );

@@ -2,36 +2,40 @@ import React, { useContext, useId } from "react";
 import { TaskContext } from "../context/TaskProvider";
 
 export default function Form() {
-    const { dispatch, taskName } = useContext(TaskContext);
+    const { dispatch, taskName, setTaskName } = useContext(TaskContext);
     const id = useId();
 
+    const handleAddTask = (e) => {
+        dispatch({
+            type: "Add",
+            value: {
+                taskName: taskName,
+                id,
+            },
+        });
+        e.target.parentElement.parentElement.firstChild.firstChild.value = "";
+    };
+
     return (
-        <div class="newtask">
-            <div class="newtask__input">
+        <div className="newtask">
+            <div className="newtask__input">
                 <input
                     type="text"
                     id="newtaskID"
                     placeholder="Add new task here..."
+                    onInput={(e) => setTaskName(e.target.value)}
                 />
                 <input type="hidden" name="updateTask" id="updateTask" />
             </div>
-            <div class="newtask__btn">
+            <div className="newtask__btn">
                 <button
-                    class="AddTaskBtn"
-                    onClick={() =>
-                        dispatch({
-                            type: "Add",
-                            value: {
-                                taskName: taskName,
-                                id,
-                            },
-                        })
-                    }
+                    className="AddTaskBtn"
+                    onClick={(e) => handleAddTask(e)}
                 >
                     Add Task
                 </button>
                 <button
-                    class="EditTaskBtn"
+                    className="EditTaskBtn"
                     style={{
                         display: "none",
                     }}
@@ -39,7 +43,7 @@ export default function Form() {
                     Edit Task
                 </button>
                 <button
-                    class="CancelTaskBtn"
+                    className="CancelTaskBtn"
                     style={{
                         display: "none",
                     }}
