@@ -8,9 +8,10 @@ export default function Form() {
     const handleAddTask = (e) => {
         dispatch({
             type: "Add",
-            value: {
-                taskName: taskName,
+            payload: {
                 id,
+                taskName: taskName,
+                isCompleted: false,
             },
         });
         e.target.parentElement.parentElement.firstChild.firstChild.value = "";

@@ -7,7 +7,7 @@ export default function AllTask() {
     return (
         <div className="task-list">
             {tasks.map((task) => (
-                <SingleTask key={task.id} taskName={task.taskName} />
+                <SingleTask key={task.id} task={task} />
             ))}
         </div>
     );

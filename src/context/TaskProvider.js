@@ -4,7 +4,12 @@ export const TaskContext = createContext();
 const reducer = (state, action) => {
     switch (action.type) {
         case "Add":
-            return [...state, { ...action.value }];
+            return [...state, { ...action.payload }];
+        case "Remove":
+            const index = state.findIndex(
+                (task) => task.id === action.payload.id
+            );
+            return state.splice(index, 1);
         default:
             return state;
     }
