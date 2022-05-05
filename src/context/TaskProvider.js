@@ -9,7 +9,9 @@ const reducer = (state, action) => {
             const index = state.findIndex(
                 (task) => task.id === action.payload.id
             );
-            return state.splice(index, 1);
+            const tasks = [...state];
+            tasks.splice(index, 1);
+            return tasks;
         default:
             return state;
     }

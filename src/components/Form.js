@@ -9,7 +9,7 @@ export default function Form() {
         dispatch({
             type: "Add",
             payload: {
-                id: uuidv4,
+                id: uuidv4(),
                 taskName: taskName,
                 isCompleted: false,
             },
