@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 
 export const TaskContext = createContext();
 const reducer = (state, action) => {
@@ -18,6 +18,9 @@ const reducer = (state, action) => {
 export default function TaskProvider({ children }) {
     const [tasks, dispatch] = useReducer(reducer, []);
     const [taskName, setTaskName] = useState("");
+    useEffect(() => {
+        console.log(tasks);
+    }, [tasks]);
     return (
         <TaskContext.Provider
             value={{ tasks, dispatch, taskName, setTaskName }}

@@ -215,6 +215,7 @@ nav header svg {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    font-size: 20px;
 }
 
 .task__op_edit {
@@ -228,7 +229,6 @@ nav header svg {
 
 .task__op_edit,
 .task__op_delete {
-    font-size: 500px;
     font-weight: bolder;
     cursor: pointer;
     -webkit-align-self: center;

@@ -13,23 +13,23 @@ export default function SingleTask({ task }) {
             </div>
 
             <div className="task__op">
-                <ion-icon
-                    className="task__op_edit"
-                    name="create-outline"
-                ></ion-icon>
+                <span className="task__op_edit">
+                    <ion-icon name="create-outline"></ion-icon>
+                </span>
 
-                <ion-icon
-                    className="task__op_delete"
-                    name="trash-outline"
-                    onClick={() =>
-                        dispatch({
-                            type: "Remove",
-                            payload: {
-                                id,
-                            },
-                        })
-                    }
-                ></ion-icon>
+                <span className="task__op_delete">
+                    <ion-icon
+                        name="trash-outline"
+                        onClick={() =>
+                            dispatch({
+                                type: "Remove",
+                                payload: {
+                                    id,
+                                },
+                            })
+                        }
+                    ></ion-icon>
+                </span>
             </div>
         </div>
     );
