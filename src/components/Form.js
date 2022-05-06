@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "../context/TaskProvider";
+import Styles from "../utils/toastStyle";
 
 export default function Form() {
     const { dispatch, taskName, setTaskName, updateTaskId, setUpdateTaskId } =
@@ -20,13 +21,7 @@ export default function Form() {
                 "";
         } else {
             toast.warn("🦄 Please Write Your Task Name", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
+                ...Styles,
             });
         }
     };

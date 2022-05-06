@@ -1,13 +1,29 @@
 import React, { useContext } from "react";
+import { toast } from "react-toastify";
 import { TaskContext } from "../context/TaskProvider";
-import "../global.css";
+import Styles from "../utils/toastStyle";
 
 export default function SingleTask({ task }) {
     const { taskName, id, isCompleted } = task;
-    const { dispatch, setUpdateTaskId, setTaskName } = useContext(TaskContext);
+    const { dispatch, setUpdateTaskId, setTaskName, updateTaskId } =
+        useContext(TaskContext);
     const handleUpdateIcon = () => {
         setTaskName(taskName);
         setUpdateTaskId(id);
+    };
+    const handleDeleteIcon = () => {
+        if (updateTaskId !== id) {
+            dispatch({
+                type: "Remove",
+                payload: {
+                    id,
+                },
+            });
+        } else {
+            toast.warn("Please Complete Task Edit Or Click Cancle Button", {
+                ...Styles,
+            });
+        }
     };
     return (
         <div className="task" data-createdat="12/12/2022, 6:59:55 PM">
@@ -27,14 +43,7 @@ export default function SingleTask({ task }) {
                 <span className="task__op_delete">
                     <ion-icon
                         name="trash-outline"
-                        onClick={() =>
-                            dispatch({
-                                type: "Remove",
-                                payload: {
-                                    id,
-                                },
-                            })
-                        }
+                        onClick={handleDeleteIcon}
                     ></ion-icon>
                 </span>
             </div>
