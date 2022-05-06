@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TaskContext } from "../context/TaskProvider";
 import Styles from "../utils/toastStyle";
@@ -7,6 +7,8 @@ export default function SingleTask({ task }) {
     const { taskName, id, isCompleted } = task;
     const { dispatch, setUpdateTaskId, setTaskName, updateTaskId } =
         useContext(TaskContext);
+    const [complete, SetComplete] = useState(false);
+
     const handleUpdateIcon = () => {
         setTaskName(taskName);
         setUpdateTaskId(id);
@@ -25,10 +27,30 @@ export default function SingleTask({ task }) {
             });
         }
     };
+
+    const handleCompleteTask = (e) => {
+        SetComplete(!complete);
+    };
+
+    useEffect(() => {
+        dispatch({
+            type: "Complete",
+            payload: {
+                id,
+                isCompleted: complete,
+            },
+        });
+    }, [dispatch, complete, id]);
+
     return (
-        <div className="task" data-createdat="12/12/2022, 6:59:55 PM">
+        <div className={`task ${complete ? "completed" : ""}`}>
             <div className="task__details">
-                <input type="checkbox" className="task-check" />
+                <input
+                    type="checkbox"
+                    checked={isCompleted ? true : false}
+                    onChange={(e) => handleCompleteTask(e)}
+                    className="task-check"
+                />
                 <label className="task-title">{taskName}</label>
             </div>
 

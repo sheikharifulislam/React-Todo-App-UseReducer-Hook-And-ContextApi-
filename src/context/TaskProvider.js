@@ -20,6 +20,14 @@ const reducer = (state, action) => {
             };
             localStorage.setItem("AllTask", JSON.stringify(state));
             return state;
+        case "Complete":
+            state[index] = {
+                ...state[index],
+                isCompleted: action.payload.isCompleted,
+            };
+            console.log(state);
+            localStorage.setItem("AllTask", JSON.stringify(state));
+            return state;
         default:
             return state;
     }
