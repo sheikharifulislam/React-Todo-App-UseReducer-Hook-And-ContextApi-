@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "../context/TaskProvider";
 
 export default function Form() {
-    const { dispatch, taskName, setTaskName } = useContext(TaskContext);
-
+    const { dispatch, taskName, setTaskName, updateTaskId, setUpdateTaskId } =
+        useContext(TaskContext);
     const handleAddTask = (e) => {
         if (taskName.length > 0) {
             dispatch({
@@ -31,6 +31,11 @@ export default function Form() {
         }
     };
 
+    const handleCancleButton = () => {
+        setTaskName("");
+        setUpdateTaskId("");
+    };
+
     return (
         <div className="newtask">
             <div className="newtask__input">
@@ -41,19 +46,27 @@ export default function Form() {
                     defaultValue={taskName}
                     onInput={(e) => setTaskName(e.target.value)}
                 />
-                <input type="hidden" name="updateTask" id="updateTask" />
+                <input
+                    type="hidden"
+                    name="updateTask"
+                    id="updateTask"
+                    defaultValue={updateTaskId}
+                />
             </div>
             <div className="newtask__btn">
                 <button
                     className="AddTaskBtn"
                     onClick={(e) => handleAddTask(e)}
+                    style={{
+                        display: updateTaskId ? "none" : "inline-block",
+                    }}
                 >
                     Add Task
                 </button>
                 <button
                     className="EditTaskBtn"
                     style={{
-                        display: "none",
+                        display: updateTaskId ? "inline-block" : "none",
                     }}
                 >
                     Edit Task
@@ -61,8 +74,9 @@ export default function Form() {
                 <button
                     className="CancelTaskBtn"
                     style={{
-                        display: "none",
+                        display: updateTaskId ? "inline-block" : "none",
                     }}
+                    onClick={handleCancleButton}
                 >
                     Cancel
                 </button>

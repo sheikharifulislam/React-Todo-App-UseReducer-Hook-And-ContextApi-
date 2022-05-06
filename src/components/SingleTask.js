@@ -4,7 +4,11 @@ import "../global.css";
 
 export default function SingleTask({ task }) {
     const { taskName, id, isCompleted } = task;
-    const { dispatch } = useContext(TaskContext);
+    const { dispatch, setUpdateTaskId, setTaskName } = useContext(TaskContext);
+    const handleUpdateIcon = () => {
+        setTaskName(taskName);
+        setUpdateTaskId(id);
+    };
     return (
         <div className="task" data-createdat="12/12/2022, 6:59:55 PM">
             <div className="task__details">
@@ -14,7 +18,10 @@ export default function SingleTask({ task }) {
 
             <div className="task__op">
                 <span className="task__op_edit">
-                    <ion-icon name="create-outline"></ion-icon>
+                    <ion-icon
+                        name="create-outline"
+                        onClick={handleUpdateIcon}
+                    ></ion-icon>
                 </span>
 
                 <span className="task__op_delete">

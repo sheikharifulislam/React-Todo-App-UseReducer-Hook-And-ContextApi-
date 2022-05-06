@@ -32,9 +32,17 @@ export default function TaskProvider({ children }) {
         })()
     );
     const [taskName, setTaskName] = useState("");
+    const [updateTaskId, setUpdateTaskId] = useState("");
     return (
         <TaskContext.Provider
-            value={{ tasks, dispatch, taskName, setTaskName }}
+            value={{
+                tasks,
+                dispatch,
+                taskName,
+                setTaskName,
+                updateTaskId,
+                setUpdateTaskId,
+            }}
         >
             {children}
         </TaskContext.Provider>
