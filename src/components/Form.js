@@ -6,15 +6,18 @@ export default function Form() {
     const { dispatch, taskName, setTaskName } = useContext(TaskContext);
 
     const handleAddTask = (e) => {
-        dispatch({
-            type: "Add",
-            payload: {
-                id: uuidv4(),
-                taskName: taskName,
-                isCompleted: false,
-            },
-        });
-        e.target.parentElement.parentElement.firstChild.firstChild.value = "";
+        if (taskName.length > 0) {
+            dispatch({
+                type: "Add",
+                payload: {
+                    id: uuidv4(),
+                    taskName: taskName,
+                    isCompleted: false,
+                },
+            });
+            e.target.parentElement.parentElement.firstChild.firstChild.value =
+                "";
+        }
     };
 
     return (
@@ -24,6 +27,7 @@ export default function Form() {
                     type="text"
                     id="newtaskID"
                     placeholder="Add new task here..."
+                    defaultValue={taskName}
                     onInput={(e) => setTaskName(e.target.value)}
                 />
                 <input type="hidden" name="updateTask" id="updateTask" />
