@@ -2,19 +2,24 @@ import React, { createContext, useReducer, useState } from "react";
 
 export const TaskContext = createContext();
 const reducer = (state, action) => {
+    const index = state.findIndex((task) => task.id === action.payload.id);
     switch (action.type) {
         case "Add":
             state = [...state, { ...action.payload }];
             localStorage.setItem("AllTask", JSON.stringify(state));
             return state;
         case "Remove":
-            const index = state.findIndex(
-                (task) => task.id === action.payload.id
-            );
             const tasks = [...state];
             tasks.splice(index, 1);
             localStorage.setItem("AllTask", JSON.stringify(tasks));
             return tasks;
+        case "Edit":
+            state[index] = {
+                ...state[index],
+                taskName: action.payload.taskName,
+            };
+            localStorage.setItem("AllTask", JSON.stringify(state));
+            return state;
         default:
             return state;
     }

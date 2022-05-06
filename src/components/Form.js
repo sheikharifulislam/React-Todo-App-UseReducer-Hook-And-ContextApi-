@@ -17,10 +17,11 @@ export default function Form() {
                     isCompleted: false,
                 },
             });
+            setTaskName("");
             e.target.parentElement.parentElement.firstChild.firstChild.value =
                 "";
         } else {
-            toast.warn("🦄 Please Write Your Task Name", {
+            toast.warn("Please Write Your Task Name", {
                 ...Styles,
             });
         }
@@ -29,6 +30,26 @@ export default function Form() {
     const handleCancleButton = () => {
         setTaskName("");
         setUpdateTaskId("");
+    };
+
+    const handleEditButton = (e) => {
+        if (taskName.length >= 1) {
+            dispatch({
+                type: "Edit",
+                payload: {
+                    id: updateTaskId,
+                    taskName,
+                },
+            });
+            setUpdateTaskId("");
+            setTaskName("");
+            e.target.parentElement.parentElement.firstChild.firstChild.value =
+                "";
+        } else {
+            toast.warn("Please Write Your Task Name Or Click Cancle Button", {
+                ...Styles,
+            });
+        }
     };
 
     return (
@@ -63,6 +84,7 @@ export default function Form() {
                     style={{
                         display: updateTaskId ? "inline-block" : "none",
                     }}
+                    onClick={(e) => handleEditButton(e)}
                 >
                     Edit Task
                 </button>
